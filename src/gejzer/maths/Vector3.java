@@ -22,10 +22,18 @@ public class Vector3 {
     z += vector3.z;
   }
 
+  public Vector3 added(Vector3 vector3) {
+    return new Vector3(x + vector3.x, y + vector3.y, z + vector3.z);
+  }
+
   public void multiply(float a) {
     x *= a;
     y *= a;
     z *= a;
+  }
+
+  public Vector3 multiplied(float a) {
+    return new Vector3(x * a, y * a, z * a);
   }
 
   public float magnitude() {
