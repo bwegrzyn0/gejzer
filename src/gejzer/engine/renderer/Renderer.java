@@ -3,7 +3,6 @@ package gejzer.engine.renderer;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 
 public abstract class Renderer extends Canvas {
 
@@ -15,7 +14,7 @@ public abstract class Renderer extends Canvas {
     this.WIDTH = WIDTH;
     this.HEIGHT = HEIGHT;
     screen = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-    pixels = ((DataBufferInt) screen.getRaster().getDataBuffer()).getData();
+    pixels = new int[WIDTH * HEIGHT];
   }
 
   public void render() {
@@ -25,11 +24,11 @@ public abstract class Renderer extends Canvas {
       return;
     }
     Graphics graphics = bs.getDrawGraphics();
-    render(screen.getGraphics());
-    graphics.drawImage(screen, WIDTH, HEIGHT, null);
+    render(screen);
+    graphics.drawImage(screen, 0, 0, WIDTH, HEIGHT, null);
     graphics.dispose();
     bs.show();
   }
 
-  public abstract void render(Graphics graphics);
+  public abstract void render(BufferedImage screen);
 }
